@@ -1,5 +1,10 @@
 package main;
 
+import java.awt.Graphics;
+
+import entities.Player;
+import utilz.Constants.PlayerContants;
+
 public class Game implements Runnable {
 
 	private GameWindow gameWindow;
@@ -7,14 +12,23 @@ public class Game implements Runnable {
 	private Thread gameThread;
 	private final int FPS_SET = 120;
 	private final int UPS_SET = 200;
+	
+	private Player player;
 
 	public Game() {
-
-		gamePanel = new GamePanel();
+		initClass();
+		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
 		gamePanel.requestFocus();
+		
 		startGameLoop();
-
+		
+		
+	}
+	
+	private void initClass() {
+		player = new Player(200, 200);
+		
 	}
 
 	private void startGameLoop() {
@@ -23,7 +37,11 @@ public class Game implements Runnable {
 	}
 	
 	public void update() {
-		gamePanel.updateGame();
+		player.update();
+	}
+	
+	public void render(Graphics g) {
+		player.render(g);
 	}
 	
 	@Override
@@ -69,7 +87,7 @@ public class Game implements Runnable {
 //				frames++;
 //			}
 
-			if (System.currentTimeMillis() - lastCheck >= 1000) {
+		if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
 				System.out.println("FPS: " + frames + "| UPS " +updates);
 				frames = 0;
@@ -78,6 +96,14 @@ public class Game implements Runnable {
 		
 		}
 
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public void windowFocusLost() {
+		player.resetDirBooleans();
 	}
 
 }
