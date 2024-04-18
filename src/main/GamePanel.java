@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
 	private BufferedImage[][] animations;
 	private int aniTick, aniIndex, aniSpeed = 30;
 	private int playerAction = IDLE;
+	private int playerDir = -1;
 	private boolean moving = false;
 
 	public GamePanel() {
