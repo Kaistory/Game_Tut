@@ -7,6 +7,7 @@ import main.Game;
 import utilz.LoadSave;
 
 public class LevelManager {
+
 	private Game game;
 	private BufferedImage[] levelSprite;
 	private Level levelOne;
@@ -38,8 +39,9 @@ public class LevelManager {
 	public void update() {
 
 	}
-	
+
 	public Level getCurrentLevel() {
 		return levelOne;
 	}
+
 }
